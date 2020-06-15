@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://RodLbal:RodLbal@rodlbal-uvefc.mongodb.net/devDB?retryWrites=true&w=majority",
+  "jwtSecret": "rodlbal-secret"
+}
