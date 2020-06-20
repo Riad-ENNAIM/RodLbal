@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Navbar from './components/layout/Navbar';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -14,6 +15,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <Navbar />
         <div className='container'>
           <Switch>
             <Route exact path='/register' component={Register} />
