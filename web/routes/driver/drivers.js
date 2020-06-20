@@ -5,10 +5,10 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
-const User = require('../models/User');
+const Driver = require('../../models/Driver');
 
-// @route     POST api/users
-// @desc      Regiter a user
+// @route     POST api/driver/drivers
+// @desc      Regiter a driver
 // @access    Public
 router.post(
   '/',
@@ -31,13 +31,13 @@ router.post(
     const { name, email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let driver = await Driver.findOne({ email });
 
-      if (user) {
-        return res.status(400).json({ msg: 'User already exists' });
+      if (driver) {
+        return res.status(400).json({ msg: 'Driver already exists' });
       }
 
-      user = new User({
+      driver = new Driver({
         name,
         email,
         password
@@ -45,13 +45,13 @@ router.post(
 
       const salt = await bcrypt.genSalt(10);
 
-      user.password = await bcrypt.hash(password, salt);
+      driver.password = await bcrypt.hash(password, salt);
 
-      await user.save();
+      await driver.save();
 
       const payload = {
-        user: {
-          id: user.id
+        driver: {
+          id: driver.id
         }
       };
 
