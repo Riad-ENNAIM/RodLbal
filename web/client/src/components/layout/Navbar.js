@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toggleDorpdownMenu } from '../../actions/navbarAction';
 import DropDownMenu from './DropDownMenu';
+import SearchInput from './SearchInput';
 
 const Navbar = ({ navbar: { isOpen }, toggleDorpdownMenu }) => {
   const [dropdownContent, setDropdownContent] = useState(null);
@@ -21,7 +22,7 @@ const Navbar = ({ navbar: { isOpen }, toggleDorpdownMenu }) => {
     <nav id="navbar">
       <div className="banner">
         <div className="search">
-
+          <SearchInput />
         </div>
 
         <ul className="navigation">

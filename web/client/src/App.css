@@ -120,9 +120,14 @@ ul {
   justify-content: space-between;
 }
 
-#navbar .banner .search {
+#navbar .banner .search #searchInput {
   width: 400px;
+  height: 100%;
+  font-size: 1em;
   background: var(--gradient-bg-color);
+  padding: 0 20px;
+  border: none;
+  border-radius: 30px;
 }
 
 #navbar .banner ul.navigation {
