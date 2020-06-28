@@ -1,86 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { toggleDorpdownMenu } from '../../actions/navbarAction';
+import ZonesMenu from './ZonesMenu';
+import NotificationsMenu from './NotificationsMenu';
+import ProfileMenu from './ProfileMenu';
 
-const DropDownMenu = ({ menu, clickCounter }) => {
-  const [isActive, setActive] = useState(false);
-  const [dropdownContent, setDropdownContent] = useState(null);
+const DropDownMenu = ({ menu, toggleDorpdownMenu }) => {
+  const dropDownRef = useRef(null);
 
   useEffect(() => {
-    if(clickCounter % 2 === 0) {
-      setActive(true);
-    } else {
-      setActive(false);
+    const handleClickOutside = event => {
+      if(event.target && (event.target.classList.contains(menu) || (event.target.parentElement && event.target.parentElement.classList.contains(menu)))) {
+        toggleDorpdownMenu(true);
+      } else {
+        toggleDorpdownMenu(dropDownRef.current && dropDownRef.current.contains(event.target));
+      }
     }
-  }, [clickCounter]);
-
-  useEffect(() => {
-    let menuContent = '';
-    switch (menu) {
-      case "zones":
-        setActive(true);
-        menuContent = getZonesMenuContent();
-        setDropdownContent(menuContent);
-        break;
-
-      case "notifications":
-        setActive(true);
-        menuContent = getNotificationsMenuContent();
-        setDropdownContent(menuContent);
-        break;
-
-      case "profile":
-        setActive(true);
-        menuContent = getProfileMenuContent();
-        setDropdownContent(menuContent);
-        break;
     
-      default:
-        setActive(false);
-        break;
-    }
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+
+    // eslint-disable-next-line
   }, [menu]);
 
-  const getZonesMenuContent = () => {
-    return (
-      <>
-        <li><Link to="/">Zone 1</Link></li>
-        <li><Link to="/">Zone 2</Link></li>
-        <li><Link to="/">Zone 3</Link></li>
-      </>
-    );
-  }
-
-  const getNotificationsMenuContent = () => {
-    return (
-      <>
-        <li><Link to="/">Notif 1</Link></li>
-        <li><Link to="/">Notif 2</Link></li>
-        <li><Link to="/">Notif 3</Link></li>
-      </>
-    );
-  }
-
-  const getProfileMenuContent = () => {
-    return (
-      <>
-        <li><Link to="/">Profile</Link></li>
-        <li><Link to="/">Settings</Link></li>
-        <li><Link to="/">Logout</Link></li>
-      </>
-    );
-  }
-
   return (
-    <ul className={`dropdown-menu ${isActive ? 'active' : ''}`}>
-      { dropdownContent }
+    <ul className="dropdown-menu active" ref={dropDownRef}>
+      {
+        menu === 'zones' ?
+          <ZonesMenu />
+        :
+          menu === 'notifications' ?
+            <NotificationsMenu />
+          :
+            menu === 'profile' ?
+              <ProfileMenu />
+            :
+              null
+      }
     </ul>
   );
 }
 
 DropDownMenu.propTypes = {
-  menu: PropTypes.string.isRequired,
-  clickCounter: PropTypes.number.isRequired
+  toggleDorpdownMenu: PropTypes.func.isRequired
 };
 
-export default DropDownMenu;
+export default connect(
+  null,
+  { toggleDorpdownMenu }
+)(DropDownMenu);

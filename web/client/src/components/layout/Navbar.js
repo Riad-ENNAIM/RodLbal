@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { toggleDorpdownMenu } from '../../actions/navbarAction';
 import DropDownMenu from './DropDownMenu';
 
-const Navbar = () => {
+const Navbar = ({ navbar: { isOpen }, toggleDorpdownMenu }) => {
   const [dropdownContent, setDropdownContent] = useState(null);
-  const [clickCounter, setClickCounter] = useState(0);
 
   const onClick = menu => {
+    if(!isOpen) {
+      toggleDorpdownMenu(true);
+    } else {
+      toggleDorpdownMenu(false);
+    }
+
     setDropdownContent(menu);
-    let counter = dropdownContent === menu ? clickCounter + 1 : 0;
-    setClickCounter(counter);
   }
 
   return (
@@ -28,7 +34,7 @@ const Navbar = () => {
           </li>
 
           <li>
-            <button className="btn btn-round btn-center btn-primary"
+            <button className="btn btn-round btn-center btn-primary zones"
               title="Zones List"
               onClick={() => onClick("zones")}
             >
@@ -37,7 +43,7 @@ const Navbar = () => {
           </li>
 
           <li>
-            <button className="btn btn-round btn-center btn-primary"
+            <button className="btn btn-round btn-center btn-primary notifications"
               title="Notifications"
               onClick={() => onClick("notifications")}
             >
@@ -46,7 +52,7 @@ const Navbar = () => {
           </li>
 
           <li>
-            <span className="btn btn-round btn-center btn-primary"
+            <span className="btn btn-round btn-center btn-primary profile"
               title="Profile"
               onClick={() => onClick("profile")}
             >
@@ -57,12 +63,24 @@ const Navbar = () => {
       </div>
 
       {
-        dropdownContent && (
-          <DropDownMenu menu={dropdownContent} clickCounter={clickCounter}/>
+        dropdownContent && isOpen && (
+          <DropDownMenu menu={dropdownContent} />
         )
       }
     </nav>
   );
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  navbar: PropTypes.object.isRequired,
+  toggleDorpdownMenu: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  navbar: state.navbar
+});
+
+export default connect(
+  mapStateToProps,
+  { toggleDorpdownMenu }
+)(Navbar);
