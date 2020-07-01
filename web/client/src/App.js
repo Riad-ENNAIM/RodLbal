@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Navbar from './components/layout/Navbar';
+import PrivateRoute from './components/routing/PrivateRoute';
+import HomePage from './components/pages/HomePage';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -15,13 +16,11 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
-        <div className='container'>
-          <Switch>
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
+          <PrivateRoute exact path="/" component={HomePage} />
+        </Switch>
       </Router>
     </Provider>
   );

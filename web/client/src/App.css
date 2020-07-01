@@ -3,7 +3,8 @@
 :root {
   --main-bg-color: #111233;
   --secondary-bg-color: #1d1e4f;
-  --text-color: #7577a6;
+  --text-color-primary: #fff;
+  --text-color-secondary: #7577a6;
   --notif-banner: #090a1e;
   --shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   --icon-color-primary: #fff;
@@ -25,16 +26,18 @@ html,body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.7em;
   background: var(--main-bg-color);
-  color: var(--text-color);
+  color: var(--text-color-primary);
 }
 
 h1, h2, h3, h4 {
   padding-bottom: 10px;
 }
 
-a {
+a,
+span.link {
   color: #d1128a;
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:focus,
@@ -124,6 +127,7 @@ ul {
   width: 400px;
   height: 100%;
   font-size: 1em;
+  color: var(--text-color-primary);
   background: var(--gradient-bg-color);
   padding: 0 20px;
   border: none;
@@ -176,6 +180,9 @@ ul {
   background: var(--secondary-bg-color);
 }
 
-#navbar ul.dropdown-menu.active li a {
-  color: #fff;
+#navbar ul.dropdown-menu.active li a,
+#navbar ul.dropdown-menu.active li span.link {
+  display: inline-block;
+  width: 100%;
+  color: var(--text-color-primary);
 }
