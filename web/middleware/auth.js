@@ -13,7 +13,7 @@ module.exports = function(req, res, next) {
   try {
     const decoded = jwt.verify(token, config.get('jwtSecret'));
 
-    req.user = decoded.user;
+    req.user = decoded.admin ? decoded.admin : decoded.driver;
     next();
   } catch (err) {
     res.status(401).json({ msg: 'Token is not valid' });

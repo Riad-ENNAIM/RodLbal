@@ -13,7 +13,7 @@ const Driver = require('../../models/Driver');
 // @access    Private
 router.get('/', auth, async (req, res) => {
   try {
-    const driver = await Driver.findById(req.driver.id).select('-password');
+    const driver = await Driver.findById(req.user.id).select('-password');
     res.json(driver);
   } catch (err) {
     console.error(err.message);

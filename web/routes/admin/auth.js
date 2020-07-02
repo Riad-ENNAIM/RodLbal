@@ -13,7 +13,7 @@ const Admin = require('../../models/Admin');
 // @access    Private
 router.get('/', auth, async (req, res) => {
   try {
-    const admin = await Admin.findById(req.admin.id).select('-password');
+    const admin = await Admin.findById(req.user.id).select('-password');
     res.json(admin);
   } catch (err) {
     console.error(err.message);
