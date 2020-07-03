@@ -10,3 +10,9 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+// Zone
+export const GET_ZONES = 'GET_ZONES';
+export const ADD_ZONE = 'ADD_ZONE';
+export const ZONE_ERROR = 'ZONE_ERROR';
+export const ZONE_LOADING = 'ZONE_LOADING';
