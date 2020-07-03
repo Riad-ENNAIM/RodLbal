@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const DriverSchema = mongoose.Schema({
+  zone: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'zones'
+  },
   name: {
     type: String,
     required: true

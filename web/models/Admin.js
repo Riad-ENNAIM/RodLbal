@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const AdminSchema = mongoose.Schema({
-  driver: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'drivers'
-  },
   name: {
     type: String,
     required: true
