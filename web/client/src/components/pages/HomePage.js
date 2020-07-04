@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadUser } from '../../actions/authAction';
-import Navbar from '../layout/Navbar';
-import Map from '../maps/Map';
+import Page from '../layout/Page';
+import Zones from '../zones/Zones';
 
 const HomePage = ({ loadUser }) => {
   useEffect(() => {
@@ -13,11 +13,9 @@ const HomePage = ({ loadUser }) => {
   }, []);
 
   return (
-    <>
-      <Navbar />
-
-      <Map />
-    </>
+    <Page>
+      <Zones />
+    </Page>
   );
 }
 

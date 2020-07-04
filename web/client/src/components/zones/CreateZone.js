@@ -27,7 +27,6 @@ const CreateZone = ({ addZone }) => {
         const polygon = event.overlay.getPath().getArray();
 
         const zoneCenter = getZoneCenter(polygon, google);
-        console.log('center', zoneCenter)
 
         const zoneCoords = polygon.map(element => {
           const point = {};

@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 const Admin = require('../../models/Admin');
 const Zone = require('../../models/Zone');
 
 // @route     GET api/admin/zones
-// @desc      Get admin zone
+// @desc      Get admin zones
 // @access    Private
 router.get('/', auth, async (req, res) => {
   try {
@@ -76,5 +76,23 @@ router.post(
     }
   }
 );
+
+// @route     GET api/admin/zones/:id
+// @desc      Get admin zone by id
+// @access    Private
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.user.id);
+    if (!admin) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    const zone = await Zone.findById(req.params.id);
+    res.json(zone);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
