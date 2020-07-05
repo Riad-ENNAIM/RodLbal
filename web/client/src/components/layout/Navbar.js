@@ -23,7 +23,7 @@ const Navbar = ({ navbar: { isOpen }, toggleDorpdownMenu, toggleDrawZone }) => {
   }
 
   const goToCreateZone = () => {
-    toggleDrawZone();
+    toggleDrawZone(true);
     history.push('/')
   }
 

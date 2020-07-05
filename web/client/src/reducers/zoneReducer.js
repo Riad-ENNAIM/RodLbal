@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
     case TOGGLE_DRAW_ZONE:
       return {
         ...state,
-        activeDrawZone: !state.activeDrawZone
+        activeDrawZone: action.payload
       };
 
     default:

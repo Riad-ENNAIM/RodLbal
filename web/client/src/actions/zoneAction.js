@@ -69,8 +69,9 @@ export const getZone = id => async dispatch => {
 };
 
 // Toggle Draw Zone
-export const toggleDrawZone = () => {
+export const toggleDrawZone = isActive => {
   return {
-    type: TOGGLE_DRAW_ZONE
+    type: TOGGLE_DRAW_ZONE,
+    payload: isActive
   };
 };
