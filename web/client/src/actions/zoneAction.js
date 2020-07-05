@@ -4,7 +4,8 @@ import {
   ADD_ZONE,
   ZONE_ERROR,
   ZONE_LOADING,
-  GET_CURRENT_ZONE
+  GET_CURRENT_ZONE,
+  TOGGLE_DRAW_ZONE
 } from './types';
 
 // Get Zones
@@ -65,4 +66,11 @@ export const getZone = id => async dispatch => {
       payload: err.response.msg
     });
   }
+};
+
+// Toggle Draw Zone
+export const toggleDrawZone = () => {
+  return {
+    type: TOGGLE_DRAW_ZONE
+  };
 };

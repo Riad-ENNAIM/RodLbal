@@ -3,13 +3,15 @@ import {
   ADD_ZONE,
   ZONE_ERROR,
   ZONE_LOADING,
-  GET_CURRENT_ZONE
+  GET_CURRENT_ZONE,
+  TOGGLE_DRAW_ZONE
 } from '../actions/types';
 
 const initialState = {
   loading: false,
   zones: null,
   currentZone: null,
+  activeDrawZone: false,
   error: null
 };
 
@@ -25,7 +27,8 @@ export default (state = initialState, action) => {
     case ADD_ZONE:
       return {
         ...state,
-        zones: [...state.zones, action.payload]
+        zones: [...state.zones, action.payload],
+        activeDrawZone: false
       };
 
     case ZONE_ERROR:
@@ -45,6 +48,12 @@ export default (state = initialState, action) => {
         ...state,
         currentZone: action.payload,
         loading: false
+      };
+
+    case TOGGLE_DRAW_ZONE:
+      return {
+        ...state,
+        activeDrawZone: !state.activeDrawZone
       };
 
     default:
